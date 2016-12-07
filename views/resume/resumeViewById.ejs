@@ -1,0 +1,16 @@
+<%- include("../includes/header.ejs", {title:"Companies - " + result[0].resume_name}); %>
+    <h1>Companies</h1>
+    <ul>
+        <li>Resume Name: <%= result[0].resume_name %></li>
+        <li>School(s):
+            <ul>
+                <% for(var i=0; result.length > i; i++ ) { %>
+                    <li><%= result[i].street + ', ' + result[i].zipcode %></li>
+                <% } %>
+            </ul>
+        </li>
+    </ul>
+
+<a href="/resume/all"><< back</a>
+
+<%- include("../includes/footer.ejs"); %>
