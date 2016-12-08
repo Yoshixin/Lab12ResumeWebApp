@@ -6,6 +6,7 @@ var router = express.Router();
 var resume_dal = require('../model/resume_dal');
 var company_dal = require('../model/company_dal');
 var school_dal = require('../model/school_dal');
+var skill_dal = require('../model/skill_dal');
 
 
 // View All resumes
@@ -46,9 +47,28 @@ router.get('/add', function(req, res){
             res.send(err);
         }
         else {
-            res.render('resume/resumeAdd', {'school': result});
+            company_dal.getAll(function(err,result2) {
+                if(err) {
+                    res.send(err);
+                }
+                else {
+                    skill_dal.getAll(function (err,result3) {
+                        if(err)
+                        {
+                            res.send(err);
+                        }
+                        else {
+                            res.render('resume/resumeAdd', {'school': result, 'company': result2, 'skill': result3});
+                        }
+
+                    });
+                }
+
+            });
+
         }
     });
+
 });
 
 // View the resume for the given id

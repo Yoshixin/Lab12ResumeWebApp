@@ -4,7 +4,7 @@ var company_dal = require('../model/company_dal');
 var address_dal = require('../model/address_dal');
 
 
-// View All companys
+// View All companies
 router.get('/all', function(req, res) {
     company_dal.getAll(function(err, result){
         if(err) {
