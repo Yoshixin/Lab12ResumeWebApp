@@ -9,13 +9,17 @@ var connection = mysql.createConnection(db.config);
 
 /*
  create or replace view resume_view as
- select s.*, a.street, a.zipcode from resume s
- join address a on a.address_id = s.address_id;
-
+ select r.resume_name, s.school_name, c.company_name, sk.name from resume r
+ join resume_school rs on rs.resume_id = r.resume_id
+ join school s on s.school_id = rs.school_id
+ join resume_company rc on r.resume_id = rc.company_id
+ join company c on c.company_id = rc.company_id
+ join resume_skill rsk on rsk.resume_id = r.resume_id
+ join skill sk on sk.skill_id = rsk.skill_id;
  */
 
 exports.getAll = function(callback) {
-    var query = 'SELECT * FROM resume_view;';
+    var query = 'SELECT * FROM resume;';
 
     connection.query(query, function(err, result) {
         callback(err, result);
