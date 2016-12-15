@@ -58,7 +58,7 @@ router.get('/add', function(req, res){
                             res.send(err);
                         }
                         else {
-                            res.render('resume/resumeAdd', {'school': result, 'company': result2, 'skill': result3});
+                            res.render('resume/resumeAdd', {'resume': result, 'company': result2, 'skill': result3});
                         }
 
                     });
@@ -102,7 +102,7 @@ router.get('/edit', function(req, res){
     else {
         resume_dal.edit(req.query.resume_id, function(err, result){
             console.log(result);
-            res.render('resume/resumeUpdate', {resume: result[0][0], school: result[1]});
+            res.render('resume/resumeUpdate', {resume: result[0][0], school: result[1], company: result[2], skill: result[3]});
         });
     }
 
